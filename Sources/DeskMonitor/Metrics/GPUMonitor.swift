@@ -29,10 +29,11 @@ final class GPUMonitor {
 
         var service = IOIteratorNext(iterator)
         while service != 0 {
-            var unmanaged: Unmanaged<CFMutableDictionary>?
-            if IORegistryEntryCreateCFProperties(service, &unmanaged, kCFAllocatorDefault, 0) == KERN_SUCCESS,
-               let properties = unmanaged?.takeRetainedValue() as? [String: Any],
-               let stats = properties["PerformanceStatistics"] as? [String: Any] {
+            // 只取这一个键。IORegistryEntryCreateCFProperties 会构造整份属性字典，
+            // 在多核 GPU 上光这一下就要上毫秒。
+            if let stats = IORegistryEntryCreateCFProperty(service, "PerformanceStatistics" as CFString,
+                                                           kCFAllocatorDefault, 0)?
+                .takeRetainedValue() as? [String: Any] {
                 found = true
                 for key in utilizationKeys {
                     if let value = stats[key] as? NSNumber {

@@ -27,10 +27,10 @@ final class DiskMonitor {
 
         var service = IOIteratorNext(iterator)
         while service != 0 {
-            var unmanaged: Unmanaged<CFMutableDictionary>?
-            if IORegistryEntryCreateCFProperties(service, &unmanaged, kCFAllocatorDefault, 0) == KERN_SUCCESS,
-               let properties = unmanaged?.takeRetainedValue() as? [String: Any],
-               let stats = properties["Statistics"] as? [String: Any] {
+            // 同 GPUMonitor：只取 Statistics，不构造整份属性字典
+            if let stats = IORegistryEntryCreateCFProperty(service, "Statistics" as CFString,
+                                                           kCFAllocatorDefault, 0)?
+                .takeRetainedValue() as? [String: Any] {
                 totalRead += (stats["Bytes (Read)"] as? NSNumber)?.uint64Value ?? 0
                 totalWritten += (stats["Bytes (Write)"] as? NSNumber)?.uint64Value ?? 0
             }
@@ -56,15 +56,16 @@ final class DiskMonitor {
                       writeBytesPerSecond: Double(writeDelta) / elapsed)
     }
 
-    /// 启动盘容量（变化慢，engine 里低频刷新）
+    /// 启动盘容量（变化慢，engine 里低频刷新）。
+    ///
+    /// 用 `statfs` 而不是 `URLResourceValues`：后者每次都要新建 URL 才能拿到新鲜值，
+    /// 绕过缓存后单次要 25 ms；`statfs` 是 0.6 µs，且读数与 `df` 一致。
+    /// （`volumeAvailableCapacityForImportantUsage` 会把可清除空间算进可用，
+    /// 在这台机器上多出约 10 GB，对一个概览面板没有意义。）
     func capacity() -> (free: UInt64, total: UInt64)? {
-        let url = URL(fileURLWithPath: "/")
-        guard let values = try? url.resourceValues(forKeys: [
-            .volumeAvailableCapacityForImportantUsageKey,
-            .volumeTotalCapacityKey
-        ]) else { return nil }
-        guard let total = values.volumeTotalCapacity,
-              let free = values.volumeAvailableCapacityForImportantUsage else { return nil }
-        return (UInt64(max(0, free)), UInt64(max(0, total)))
+        var fs = statfs()
+        guard statfs("/", &fs) == 0 else { return nil }
+        let blockSize = UInt64(fs.f_bsize)
+        return (UInt64(fs.f_bavail) * blockSize, UInt64(fs.f_blocks) * blockSize)
     }
 }

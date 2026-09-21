@@ -10,43 +10,38 @@ struct Sparkline: View {
 
     var body: some View {
         GeometryReader { geometry in
-            let points = normalized(width: geometry.size.width, height: geometry.size.height)
+            let shape = paths(in: geometry.size)
             ZStack {
-                area(points, height: geometry.size.height)
+                shape.area
                     .fill(LinearGradient(colors: [tint.opacity(0.45), tint.opacity(0.03)],
                                          startPoint: .top, endPoint: .bottom))
-                line(points)
+                shape.line
                     .stroke(tint, style: StrokeStyle(lineWidth: 1.6, lineCap: .round, lineJoin: .round))
             }
         }
     }
 
-    private func normalized(width: CGFloat, height: CGFloat) -> [CGPoint] {
+    /// 一趟扫完同时产出折线和填充区：不铺中间数组，路径也只构建一次。
+    private func paths(in size: CGSize) -> (line: Path, area: Path) {
         let slots = MetricsEngine.historyLength
-        let padded = Array(repeating: 0.0, count: max(0, slots - values.count)) + values.suffix(slots)
+        let tail = values.suffix(slots)
+        let leading = slots - tail.count                 // 左侧留空的槽位数
         let ceiling = max(maxValue, 0.0001)
-        let step = width / CGFloat(max(slots - 1, 1))
-        return padded.enumerated().map { index, value in
+        let step = size.width / CGFloat(max(slots - 1, 1))
+
+        var line = Path()
+        for index in 0..<slots {
+            let value = index < leading ? 0 : tail[tail.startIndex + (index - leading)]
             let ratio = min(max(value / ceiling, 0), 1)
-            return CGPoint(x: CGFloat(index) * step, y: height - CGFloat(ratio) * height)
+            let point = CGPoint(x: CGFloat(index) * step, y: size.height - CGFloat(ratio) * size.height)
+            if index == 0 { line.move(to: point) } else { line.addLine(to: point) }
         }
-    }
 
-    private func line(_ points: [CGPoint]) -> Path {
-        var path = Path()
-        guard let first = points.first else { return path }
-        path.move(to: first)
-        for point in points.dropFirst() { path.addLine(to: point) }
-        return path
-    }
-
-    private func area(_ points: [CGPoint], height: CGFloat) -> Path {
-        var path = line(points)
-        guard let first = points.first, let last = points.last else { return path }
-        path.addLine(to: CGPoint(x: last.x, y: height))
-        path.addLine(to: CGPoint(x: first.x, y: height))
-        path.closeSubpath()
-        return path
+        var area = line
+        area.addLine(to: CGPoint(x: CGFloat(slots - 1) * step, y: size.height))
+        area.addLine(to: CGPoint(x: 0, y: size.height))
+        area.closeSubpath()
+        return (line, area)
     }
 }
 

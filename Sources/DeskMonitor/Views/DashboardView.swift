@@ -211,10 +211,10 @@ struct SegmentedBar: View {
             ZStack(alignment: .leading) {
                 Capsule().fill(.white.opacity(0.09))
                 HStack(spacing: 1) {
-                    ForEach(Array(segments.enumerated()), id: \.offset) { _, segment in
+                    ForEach(segments.indices, id: \.self) { index in
                         Rectangle()
-                            .fill(segment.color)
-                            .frame(width: max(0, geometry.size.width * min(segment.fraction, 1)))
+                            .fill(segments[index].color)
+                            .frame(width: max(0, geometry.size.width * min(segments[index].fraction, 1)))
                     }
                     Spacer(minLength: 0)
                 }
@@ -241,7 +241,7 @@ struct TrafficBlock: View {
     var caption: String
 
     var body: some View {
-        let peak = max((downHistory + upHistory).max() ?? 0, floor)
+        let peak = max(downHistory.max() ?? 0, upHistory.max() ?? 0, floor)
         return VStack(alignment: .leading, spacing: 5) {
             HStack(alignment: .firstTextBaseline, spacing: 6) {
                 Text(title)
