@@ -27,7 +27,7 @@ final class DiskMonitor {
 
         var service = IOIteratorNext(iterator)
         while service != 0 {
-            // 同 GPUMonitor：只取 Statistics，不构造整份属性字典
+            // 只取 Statistics 一个键：构造整份属性字典的开销没必要付
             if let stats = IORegistryEntryCreateCFProperty(service, "Statistics" as CFString,
                                                            kCFAllocatorDefault, 0)?
                 .takeRetainedValue() as? [String: Any] {
@@ -56,12 +56,9 @@ final class DiskMonitor {
                       writeBytesPerSecond: Double(writeDelta) / elapsed)
     }
 
-    /// 启动盘容量（变化慢，engine 里低频刷新）。
-    ///
-    /// 用 `statfs` 而不是 `URLResourceValues`：后者每次都要新建 URL 才能拿到新鲜值，
-    /// 绕过缓存后单次要 25 ms；`statfs` 是 0.6 µs，且读数与 `df` 一致。
-    /// （`volumeAvailableCapacityForImportantUsage` 会把可清除空间算进可用，
-    /// 在这台机器上多出约 10 GB，对一个概览面板没有意义。）
+    /// 启动盘容量。口径与 `df` 一致，不含可清除空间
+    /// —— `volumeAvailableCapacityForImportantUsage` 会把可清除空间算作可用，
+    /// 对一个概览面板没有意义。
     func capacity() -> (free: UInt64, total: UInt64)? {
         var fs = statfs()
         guard statfs("/", &fs) == 0 else { return nil }

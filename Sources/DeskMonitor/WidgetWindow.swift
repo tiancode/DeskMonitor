@@ -1,6 +1,9 @@
 import AppKit
 
-/// 无边框窗口默认不能成为 key window，也吃不到拖拽，这里补齐。
+/// 无边框窗口默认不能成为 key window，这里放开。
+///
+/// `mouseDown` 里的 `performDrag` 只是兜底：面板由 SwiftUI 承载，事件未必传得到
+/// NSWindow，拖动主要靠 `isMovableByWindowBackground`。位置变化以 didMove 通知为准。
 final class WidgetWindow: NSWindow {
 
     var contextMenu: NSMenu?

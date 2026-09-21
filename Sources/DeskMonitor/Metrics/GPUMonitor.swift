@@ -29,8 +29,7 @@ final class GPUMonitor {
 
         var service = IOIteratorNext(iterator)
         while service != 0 {
-            // 只取这一个键。IORegistryEntryCreateCFProperties 会构造整份属性字典，
-            // 在多核 GPU 上光这一下就要上毫秒。
+            // 只取 PerformanceStatistics 一个键：整份属性字典在多核 GPU 上构造一次要上毫秒
             if let stats = IORegistryEntryCreateCFProperty(service, "PerformanceStatistics" as CFString,
                                                            kCFAllocatorDefault, 0)?
                 .takeRetainedValue() as? [String: Any] {

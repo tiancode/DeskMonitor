@@ -11,7 +11,7 @@ enum Format {
         byteCount(Double(bytes), suffix: "")
     }
 
-    static func byteCount(_ value: Double, suffix: String) -> String {
+    private static func byteCount(_ value: Double, suffix: String) -> String {
         let units = ["B", "KB", "MB", "GB", "TB", "PB"]
         var amount = max(value, 0)
         var index = 0

@@ -21,7 +21,7 @@ struct Sparkline: View {
         }
     }
 
-    /// 一趟扫完同时产出折线和填充区：不铺中间数组，路径也只构建一次。
+    /// 一趟扫完同时产出折线和填充区，不铺中间数组。
     private func paths(in size: CGSize) -> (line: Path, area: Path) {
         let slots = MetricsEngine.historyLength
         let tail = values.suffix(slots)

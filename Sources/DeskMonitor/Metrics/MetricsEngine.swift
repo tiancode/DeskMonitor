@@ -53,7 +53,6 @@ final class MetricsEngine: ObservableObject {
 
     private let queue = DispatchQueue(label: "com.deskmonitor.sampler", qos: .utility)
     private var timer: DispatchSourceTimer?
-    private var tick = 0
 
     init() {
         let stored = UserDefaults.standard.double(forKey: "refreshInterval")
@@ -62,7 +61,7 @@ final class MetricsEngine: ObservableObject {
         restart()
     }
 
-    func restart() {
+    private func restart() {
         timer?.cancel()
         let timer = DispatchSource.makeTimerSource(queue: queue)
         timer.schedule(deadline: .now() + 0.05, repeating: interval, leeway: .milliseconds(50))
@@ -78,8 +77,7 @@ final class MetricsEngine: ObservableObject {
         let diskSample = diskMonitor.read()
         let networkSample = networkMonitor.read()
 
-        tick += 1
-        let capacity = (tick % 30 == 1) ? diskMonitor.capacity() : nil
+        let capacity = diskMonitor.capacity()
 
         DispatchQueue.main.async { [weak self] in
             guard let self else { return }
@@ -101,7 +99,6 @@ final class MetricsEngine: ObservableObject {
 
             if let memorySample {
                 memoryUsed = memorySample.used
-                memoryTotal = memorySample.total
                 memoryApp = memorySample.app
                 memoryWired = memorySample.wired
                 memoryCompressed = memorySample.compressed

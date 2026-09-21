@@ -42,7 +42,7 @@ open DeskMonitor.app
 | 内存 | `host_statistics64(HOST_VM_INFO64)` + `vm.swapusage` | 已用 = 应用内存 + 联动(wired) + 已压缩，口径对齐活动监视器 |
 | 内存压力 | `kern.memorystatus_vm_pressure_level` | 「已用」高不等于吃紧，压力才是真信号 |
 | 硬盘 | IORegistry `IOBlockStorageDriver` → `Statistics` | 累计字节数求差 ÷ 间隔 = 实时读写速度 |
-| 容量 | `URLResourceValues` | 启动盘可用 / 总容量，30 个周期刷新一次 |
+| 容量 | `statfs` | 启动盘可用 / 总容量，口径与 `df` 一致 |
 | 网络 | `sysctl(NET_RT_IFLIST2)` → `if_data64` | 主网卡收发字节求差；网卡由 `SCDynamicStore` 的 PrimaryInterface 决定 |
 
 两个容易读错的数据源：
