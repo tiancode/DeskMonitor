@@ -75,7 +75,7 @@ final class NetworkMonitor {
         return name
     }
 
-    /// en0 → “Wi-Fi” / “以太网”，查一次就缓存
+    /// en0 → “Wi-Fi” / “Ethernet”，名称由系统按应用当前语言给出；查一次就缓存
     private func displayName(for bsdName: String) -> String {
         if let cached = displayNames[bsdName] { return cached }
         var resolved = bsdName

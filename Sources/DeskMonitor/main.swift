@@ -72,8 +72,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate {
             name: NSApplication.didChangeScreenParametersNotification,
             object: nil)
 
-        // 面板由 SwiftUI 承载，mouseDown 不一定能传到 NSWindow，拖动可能是
-        // isMovableByWindowBackground 在 AppKit 内部完成的；didMove 不管谁移动都会发。
+        // didMove 不管窗口被谁移动都会发，是唯一可靠的拖动信号（见 WidgetWindow）
         NotificationCenter.default.addObserver(
             self,
             selector: #selector(windowDidMove),

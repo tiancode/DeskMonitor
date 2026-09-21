@@ -1,5 +1,7 @@
 # 桌面监视器 DeskMonitor
 
+**简体中文** · [繁體中文](docs/README.zh-Hant.md) · [English](docs/README.en.md) · [日本語](docs/README.ja.md) · [한국어](docs/README.ko.md) · [Deutsch](docs/README.de.md) · [Français](docs/README.fr.md) · [Español](docs/README.es.md) · [Português (BR)](docs/README.pt-BR.md) · [Русский](docs/README.ru.md) · [Italiano](docs/README.it.md)
+
 macOS 桌面悬浮小组件，实时显示 **CPU / GPU / 内存 / 硬盘读写 / 网络上下行**。
 原生 SwiftUI，单进程，无依赖，全部数据走系统底层 API——**不需要 sudo**。
 
@@ -19,7 +21,7 @@ open DeskMonitor.app
 简体中文 · 繁體中文 · English · 日本語 · 한국어 · Deutsch · Français · Español ·
 Português (BR) · Русский · Italiano
 
-其余语言回退到英文。也可以在「系统设置 › 语言与地区 › 应用程序」里单独给本应用指定语言。
+其余语言回退到英文。也可以在「系统设置 › 通用 › 语言与地区 › 应用程序」里单独给本应用指定语言。
 
 新增一种语言只要复制一份 `Resources/en.lproj/`，改成对应的语言代码译完，
 再把该代码加进 `Info.plist` 的 `CFBundleLocalizations` 即可，代码不用动。
@@ -74,7 +76,7 @@ Sources/DeskMonitor/
 ├── main.swift              应用入口、菜单栏、菜单动作
 ├── WidgetWindow.swift      无边框可拖拽窗口 + 层级 / 四角吸附定义
 ├── Probe.swift             --probe 文本校验模式
-├── Localization.swift      文案查表，键即英文原文
+├── Localization.swift      文案查表
 ├── Metrics/
 │   ├── CPUMonitor.swift
 │   ├── GPUMonitor.swift
