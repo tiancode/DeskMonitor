@@ -1,0 +1,74 @@
+import AppKit
+
+/// 无边框窗口默认不能成为 key window，也吃不到拖拽，这里补齐。
+final class WidgetWindow: NSWindow {
+
+    var contextMenu: NSMenu?
+
+    override var canBecomeKey: Bool { true }
+    override var canBecomeMain: Bool { false }
+
+    override func mouseDown(with event: NSEvent) {
+        performDrag(with: event)
+    }
+
+    override func rightMouseDown(with event: NSEvent) {
+        guard let contextMenu, let contentView else { return }
+        contextMenu.popUp(positioning: nil, at: event.locationInWindow, in: contentView)
+    }
+}
+
+/// 悬浮层级：贴桌面（被其它窗口遮住）/ 普通 / 始终置顶
+enum WindowLayer: Int, CaseIterable {
+
+    case desktop = 0
+    case normal = 1
+    case floating = 2
+
+    var title: String {
+        switch self {
+        case .desktop: return "贴在桌面上"
+        case .normal: return "普通窗口"
+        case .floating: return "始终置顶"
+        }
+    }
+
+    var level: NSWindow.Level {
+        switch self {
+        case .desktop: return NSWindow.Level(rawValue: Int(CGWindowLevelForKey(.desktopIconWindow)) + 1)
+        case .normal: return .normal
+        case .floating: return .floating
+        }
+    }
+}
+
+/// 吸附到屏幕四角；选定后换显示器、改分辨率都会重新贴回去。
+enum WindowCorner: Int, CaseIterable {
+
+    case topLeft = 0
+    case topRight = 1
+    case bottomLeft = 2
+    case bottomRight = 3
+
+    var title: String {
+        switch self {
+        case .topLeft: return "左上角"
+        case .topRight: return "右上角"
+        case .bottomLeft: return "左下角"
+        case .bottomRight: return "右下角"
+        }
+    }
+
+    func origin(for size: NSSize, in visible: NSRect, margin: CGFloat = 24) -> NSPoint {
+        let left = visible.minX + margin
+        let right = visible.maxX - size.width - margin
+        let top = visible.maxY - size.height - margin
+        let bottom = visible.minY + margin
+        switch self {
+        case .topLeft: return NSPoint(x: left, y: top)
+        case .topRight: return NSPoint(x: right, y: top)
+        case .bottomLeft: return NSPoint(x: left, y: bottom)
+        case .bottomRight: return NSPoint(x: right, y: bottom)
+        }
+    }
+}

@@ -1,0 +1,4 @@
+.build/
+DeskMonitor.app/
+.swiftpm/
+.DS_Store
