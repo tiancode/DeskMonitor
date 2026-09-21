@@ -1,0 +1,52 @@
+/* Panel */
+"System Monitor" = "システムモニタ";
+"User %1$@ · Sys %2$@" = "ユーザ %1$@ · システム %2$@";
+"Peak %1$@ over %2$ds" = "直近 %2$d 秒のピーク %1$@";
+"No IOAccelerator" = "IOAccelerator が見つかりません";
+"Memory" = "メモリ";
+"Swap %@" = "スワップ %@";
+"Disk" = "ディスク";
+"Network" = "ネットワーク";
+"%1$@ free of %2$@" = "空き %1$@ / %2$@";
+"Read / Write" = "読み込み / 書き込み";
+"%1$@ · Session ↓%2$@ ↑%3$@" = "%1$@ · セッション ↓%2$@ ↑%3$@";
+"%1$@ · Peak %2$@" = "%1$@ · ピーク %2$@";
+
+/* Memory pressure badge — keep short, the pill is narrow */
+"Critical" = "危険";
+"Warning" = "警告";
+"Normal" = "正常";
+
+/* Window level */
+"On Desktop" = "デスクトップ上";
+"Normal Window" = "通常ウインドウ";
+"Always on Top" = "常に最前面";
+
+/* Snap position */
+"Top Left" = "左上";
+"Top Right" = "右上";
+"Bottom Left" = "左下";
+"Bottom Right" = "右下";
+"Free Placement" = "自由配置";
+
+/* Menu */
+"Hide Panel" = "パネルを隠す";
+"Show Panel" = "パネルを表示";
+"Window Level" = "ウインドウレベル";
+"Refresh Interval" = "更新間隔";
+"%@ s" = "%@ 秒";
+"Opacity" = "不透明度";
+"Snap Position" = "スナップ位置";
+"Show Menu Bar Icon" = "メニューバーアイコンを表示";
+"Launch at Login" = "ログイン時に起動";
+"Quit" = "終了";
+
+/* Network */
+"Not connected" = "未接続";
+
+/* --probe text output */
+"n/a (no IOAccelerator)" = "n/a（IOAccelerator なし）";
+"App %1$@ · Wired %2$@ · Compressed %3$@" = "アプリ %1$@ · 確保 %2$@ · 圧縮 %3$@";
+"Read %1$@  Write %2$@" = "読み %1$@  書き %2$@";
+"Session ↓%1$@ ↑%2$@" = "セッション ↓%1$@ ↑%2$@";
+"Startup disk %1$@ free of %2$@" = "起動ディスク 空き %1$@ / %2$@";

@@ -1,6 +1,6 @@
-/* 基准语言：键即英文原文，这里逐条列出便于对照和改写措辞 */
+/* Base language: the key IS the English string. Listed here so wording can be tweaked without touching code. */
 
-/* 面板 */
+/* Panel */
 "System Monitor" = "System Monitor";
 "User %1$@ · Sys %2$@" = "User %1$@ · Sys %2$@";
 "Peak %1$@ over %2$ds" = "Peak %1$@ over %2$ds";
@@ -14,24 +14,24 @@
 "%1$@ · Session ↓%2$@ ↑%3$@" = "%1$@ · Session ↓%2$@ ↑%3$@";
 "%1$@ · Peak %2$@" = "%1$@ · Peak %2$@";
 
-/* 内存压力角标，宽度有限，保持短 */
+/* Memory pressure badge — keep short, the pill is narrow */
 "Critical" = "Critical";
 "Warning" = "Warning";
 "Normal" = "Normal";
 
-/* 窗口层级 */
+/* Window level */
 "On Desktop" = "On Desktop";
 "Normal Window" = "Normal Window";
 "Always on Top" = "Always on Top";
 
-/* 吸附位置 */
+/* Snap position */
 "Top Left" = "Top Left";
 "Top Right" = "Top Right";
 "Bottom Left" = "Bottom Left";
 "Bottom Right" = "Bottom Right";
 "Free Placement" = "Free Placement";
 
-/* 菜单 */
+/* Menu */
 "Hide Panel" = "Hide Panel";
 "Show Panel" = "Show Panel";
 "Window Level" = "Window Level";
@@ -43,10 +43,10 @@
 "Launch at Login" = "Launch at Login";
 "Quit" = "Quit";
 
-/* 网络 */
+/* Network */
 "Not connected" = "Not connected";
 
-/* --probe 文本输出 */
+/* --probe text output */
 "n/a (no IOAccelerator)" = "n/a (no IOAccelerator)";
 "App %1$@ · Wired %2$@ · Compressed %3$@" = "App %1$@ · Wired %2$@ · Compressed %3$@";
 "Read %1$@  Write %2$@" = "Read %1$@  Write %2$@";

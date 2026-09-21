@@ -14,8 +14,12 @@ open DeskMonitor.app
 
 ## 语言
 
-界面跟随系统语言，目前提供简体中文和英文，其余语言回退到英文。
-也可以在「系统设置 › 语言与地区 › 应用程序」里单独给本应用指定语言。
+界面跟随系统语言，共 11 种：
+
+简体中文 · 繁體中文 · English · 日本語 · 한국어 · Deutsch · Français · Español ·
+Português (BR) · Русский · Italiano
+
+其余语言回退到英文。也可以在「系统设置 › 语言与地区 › 应用程序」里单独给本应用指定语言。
 
 新增一种语言只要复制一份 `Resources/en.lproj/`，改成对应的语言代码译完，
 再把该代码加进 `Info.plist` 的 `CFBundleLocalizations` 即可，代码不用动。
@@ -85,6 +89,6 @@ Sources/DeskMonitor/
     └── VisualEffectView.swift  毛玻璃背景
 
 Resources/
-├── en.lproj/               英文（基准语言）
-└── zh-Hans.lproj/          简体中文
+├── en.lproj/               英文（基准语言，键即英文原文）
+└── …                       zh-Hans / zh-Hant / ja / ko / de / fr / es / pt-BR / ru / it
 ```

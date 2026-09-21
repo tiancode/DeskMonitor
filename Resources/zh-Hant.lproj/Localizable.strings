@@ -1,0 +1,52 @@
+/* Panel */
+"System Monitor" = "系統監視";
+"User %1$@ · Sys %2$@" = "使用者 %1$@ · 系統 %2$@";
+"Peak %1$@ over %2$ds" = "近 %2$d 秒峰值 %1$@";
+"No IOAccelerator" = "未偵測到 IOAccelerator";
+"Memory" = "記憶體";
+"Swap %@" = "交換 %@";
+"Disk" = "硬碟";
+"Network" = "網路";
+"%1$@ free of %2$@" = "可用 %1$@ / %2$@";
+"Read / Write" = "讀 / 寫";
+"%1$@ · Session ↓%2$@ ↑%3$@" = "%1$@ · 本次 ↓%2$@ ↑%3$@";
+"%1$@ · Peak %2$@" = "%1$@ · 峰值 %2$@";
+
+/* Memory pressure badge — keep short, the pill is narrow */
+"Critical" = "壓力緊急";
+"Warning" = "壓力警告";
+"Normal" = "壓力正常";
+
+/* Window level */
+"On Desktop" = "貼在桌面上";
+"Normal Window" = "一般視窗";
+"Always on Top" = "永遠最上層";
+
+/* Snap position */
+"Top Left" = "左上角";
+"Top Right" = "右上角";
+"Bottom Left" = "左下角";
+"Bottom Right" = "右下角";
+"Free Placement" = "自由擺放";
+
+/* Menu */
+"Hide Panel" = "隱藏面板";
+"Show Panel" = "顯示面板";
+"Window Level" = "視窗層級";
+"Refresh Interval" = "更新間隔";
+"%@ s" = "%@ 秒";
+"Opacity" = "不透明度";
+"Snap Position" = "吸附位置";
+"Show Menu Bar Icon" = "顯示選單列圖像";
+"Launch at Login" = "登入時啟動";
+"Quit" = "結束";
+
+/* Network */
+"Not connected" = "未連線";
+
+/* --probe text output */
+"n/a (no IOAccelerator)" = "n/a（無 IOAccelerator）";
+"App %1$@ · Wired %2$@ · Compressed %3$@" = "應用程式 %1$@ · 已佔用 %2$@ · 已壓縮 %3$@";
+"Read %1$@  Write %2$@" = "讀 %1$@  寫 %2$@";
+"Session ↓%1$@ ↑%2$@" = "本次 ↓%1$@ ↑%2$@";
+"Startup disk %1$@ free of %2$@" = "啟動磁碟 可用 %1$@ / %2$@";

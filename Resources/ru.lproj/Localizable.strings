@@ -1,0 +1,52 @@
+/* Panel */
+"System Monitor" = "Системный монитор";
+"User %1$@ · Sys %2$@" = "Польз. %1$@ · Сист. %2$@";
+"Peak %1$@ over %2$ds" = "Пик %1$@ за %2$d с";
+"No IOAccelerator" = "IOAccelerator не найден";
+"Memory" = "Память";
+"Swap %@" = "Подкачка %@";
+"Disk" = "Диск";
+"Network" = "Сеть";
+"%1$@ free of %2$@" = "Свободно %1$@ из %2$@";
+"Read / Write" = "Чтение / Запись";
+"%1$@ · Session ↓%2$@ ↑%3$@" = "%1$@ · Сеанс ↓%2$@ ↑%3$@";
+"%1$@ · Peak %2$@" = "%1$@ · Пик %2$@";
+
+/* Memory pressure badge — keep short, the pill is narrow */
+"Critical" = "Критично";
+"Warning" = "Внимание";
+"Normal" = "Норма";
+
+/* Window level */
+"On Desktop" = "На рабочем столе";
+"Normal Window" = "Обычное окно";
+"Always on Top" = "Поверх всех окон";
+
+/* Snap position */
+"Top Left" = "Слева вверху";
+"Top Right" = "Справа вверху";
+"Bottom Left" = "Слева внизу";
+"Bottom Right" = "Справа внизу";
+"Free Placement" = "Свободное размещение";
+
+/* Menu */
+"Hide Panel" = "Скрыть панель";
+"Show Panel" = "Показать панель";
+"Window Level" = "Уровень окна";
+"Refresh Interval" = "Интервал обновления";
+"%@ s" = "%@ с";
+"Opacity" = "Непрозрачность";
+"Snap Position" = "Привязка к углу";
+"Show Menu Bar Icon" = "Показывать значок в строке меню";
+"Launch at Login" = "Запускать при входе";
+"Quit" = "Завершить";
+
+/* Network */
+"Not connected" = "Нет подключения";
+
+/* --probe text output */
+"n/a (no IOAccelerator)" = "n/a (нет IOAccelerator)";
+"App %1$@ · Wired %2$@ · Compressed %3$@" = "Прилож. %1$@ · Связанная %2$@ · Сжатая %3$@";
+"Read %1$@  Write %2$@" = "Чтение %1$@  Запись %2$@";
+"Session ↓%1$@ ↑%2$@" = "Сеанс ↓%1$@ ↑%2$@";
+"Startup disk %1$@ free of %2$@" = "Загрузочный диск: свободно %1$@ из %2$@";

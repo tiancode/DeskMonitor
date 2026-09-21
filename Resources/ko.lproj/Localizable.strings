@@ -1,0 +1,52 @@
+/* Panel */
+"System Monitor" = "시스템 모니터";
+"User %1$@ · Sys %2$@" = "사용자 %1$@ · 시스템 %2$@";
+"Peak %1$@ over %2$ds" = "최근 %2$d초 최고 %1$@";
+"No IOAccelerator" = "IOAccelerator 없음";
+"Memory" = "메모리";
+"Swap %@" = "스왑 %@";
+"Disk" = "디스크";
+"Network" = "네트워크";
+"%1$@ free of %2$@" = "여유 %1$@ / %2$@";
+"Read / Write" = "읽기 / 쓰기";
+"%1$@ · Session ↓%2$@ ↑%3$@" = "%1$@ · 세션 ↓%2$@ ↑%3$@";
+"%1$@ · Peak %2$@" = "%1$@ · 최고 %2$@";
+
+/* Memory pressure badge — keep short, the pill is narrow */
+"Critical" = "위험";
+"Warning" = "경고";
+"Normal" = "정상";
+
+/* Window level */
+"On Desktop" = "바탕화면 위";
+"Normal Window" = "일반 윈도우";
+"Always on Top" = "항상 위에";
+
+/* Snap position */
+"Top Left" = "왼쪽 상단";
+"Top Right" = "오른쪽 상단";
+"Bottom Left" = "왼쪽 하단";
+"Bottom Right" = "오른쪽 하단";
+"Free Placement" = "자유 배치";
+
+/* Menu */
+"Hide Panel" = "패널 가리기";
+"Show Panel" = "패널 표시";
+"Window Level" = "윈도우 레벨";
+"Refresh Interval" = "새로 고침 간격";
+"%@ s" = "%@초";
+"Opacity" = "불투명도";
+"Snap Position" = "스냅 위치";
+"Show Menu Bar Icon" = "메뉴 막대 아이콘 표시";
+"Launch at Login" = "로그인 시 실행";
+"Quit" = "종료";
+
+/* Network */
+"Not connected" = "연결 안 됨";
+
+/* --probe text output */
+"n/a (no IOAccelerator)" = "n/a (IOAccelerator 없음)";
+"App %1$@ · Wired %2$@ · Compressed %3$@" = "앱 %1$@ · 고정 %2$@ · 압축 %3$@";
+"Read %1$@  Write %2$@" = "읽기 %1$@  쓰기 %2$@";
+"Session ↓%1$@ ↑%2$@" = "세션 ↓%1$@ ↑%2$@";
+"Startup disk %1$@ free of %2$@" = "시동 디스크 여유 %1$@ / %2$@";

@@ -1,0 +1,52 @@
+/* Panel */
+"System Monitor" = "Monitor do sistema";
+"User %1$@ · Sys %2$@" = "Usuário %1$@ · Sistema %2$@";
+"Peak %1$@ over %2$ds" = "Pico %1$@ em %2$d s";
+"No IOAccelerator" = "Sem IOAccelerator";
+"Memory" = "Memória";
+"Swap %@" = "Swap %@";
+"Disk" = "Disco";
+"Network" = "Rede";
+"%1$@ free of %2$@" = "%1$@ livres de %2$@";
+"Read / Write" = "Leitura / Gravação";
+"%1$@ · Session ↓%2$@ ↑%3$@" = "%1$@ · Sessão ↓%2$@ ↑%3$@";
+"%1$@ · Peak %2$@" = "%1$@ · Pico %2$@";
+
+/* Memory pressure badge — keep short, the pill is narrow */
+"Critical" = "Crítica";
+"Warning" = "Aviso";
+"Normal" = "Normal";
+
+/* Window level */
+"On Desktop" = "Na Mesa";
+"Normal Window" = "Janela normal";
+"Always on Top" = "Sempre visível";
+
+/* Snap position */
+"Top Left" = "Superior esquerdo";
+"Top Right" = "Superior direito";
+"Bottom Left" = "Inferior esquerdo";
+"Bottom Right" = "Inferior direito";
+"Free Placement" = "Posição livre";
+
+/* Menu */
+"Hide Panel" = "Ocultar painel";
+"Show Panel" = "Mostrar painel";
+"Window Level" = "Nível da janela";
+"Refresh Interval" = "Intervalo de atualização";
+"%@ s" = "%@ s";
+"Opacity" = "Opacidade";
+"Snap Position" = "Posição de encaixe";
+"Show Menu Bar Icon" = "Mostrar ícone na barra de menus";
+"Launch at Login" = "Abrir ao iniciar sessão";
+"Quit" = "Encerrar";
+
+/* Network */
+"Not connected" = "Sem conexão";
+
+/* --probe text output */
+"n/a (no IOAccelerator)" = "n/a (sem IOAccelerator)";
+"App %1$@ · Wired %2$@ · Compressed %3$@" = "App %1$@ · Reservada %2$@ · Comprimida %3$@";
+"Read %1$@  Write %2$@" = "Leitura %1$@  Gravação %2$@";
+"Session ↓%1$@ ↑%2$@" = "Sessão ↓%1$@ ↑%2$@";
+"Startup disk %1$@ free of %2$@" = "Disco de inicialização %1$@ livres de %2$@";
