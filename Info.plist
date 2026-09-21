@@ -5,7 +5,14 @@
 	<key>CFBundleName</key>
 	<string>DeskMonitor</string>
 	<key>CFBundleDisplayName</key>
-	<string>桌面监视器</string>
+	<string>DeskMonitor</string>
+	<key>CFBundleDevelopmentRegion</key>
+	<string>en</string>
+	<key>CFBundleLocalizations</key>
+	<array>
+		<string>en</string>
+		<string>zh-Hans</string>
+	</array>
 	<key>CFBundleIdentifier</key>
 	<string>com.deht.deskmonitor</string>
 	<key>CFBundleExecutable</key>

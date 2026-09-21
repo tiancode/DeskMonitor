@@ -19,28 +19,34 @@ enum Probe {
 
             if round > 0 {
                 let cpuText = cpuSample.map { Format.percent($0.total) } ?? "n/a"
-                let gpuText = gpuSample.map { Format.percent($0) } ?? "n/a (无 IOAccelerator)"
+                let gpuText = gpuSample.map { Format.percent($0) } ?? L("n/a (no IOAccelerator)")
                 let memoryText = memorySample.map {
-                    "\(Format.size($0.used)) / \(Format.size($0.total))  [应用 \(Format.size($0.app)) · 联动 \(Format.size($0.wired)) · 压缩 \(Format.size($0.compressed))]"
+                    "\(Format.size($0.used)) / \(Format.size($0.total))  ["
+                        + L("App %1$@ · Wired %2$@ · Compressed %3$@", Format.size($0.app),
+                            Format.size($0.wired), Format.size($0.compressed)) + "]"
                 } ?? "n/a"
                 let diskText = diskSample.map {
-                    "读 \(Format.speed($0.readBytesPerSecond))  写 \(Format.speed($0.writeBytesPerSecond))"
+                    L("Read %1$@  Write %2$@", Format.speed($0.readBytesPerSecond),
+                      Format.speed($0.writeBytesPerSecond))
                 } ?? "n/a"
 
                 let networkText = networkSample.map {
-                    "↓ \(Format.speed($0.download))  ↑ \(Format.speed($0.upload))  [\($0.interface)]  会话 ↓\(Format.size($0.sessionReceived)) ↑\(Format.size($0.sessionSent))"
+                    "↓ \(Format.speed($0.download))  ↑ \(Format.speed($0.upload))  [\($0.interface)]  "
+                        + L("Session ↓%1$@ ↑%2$@", Format.size($0.sessionReceived),
+                            Format.size($0.sessionSent))
                 } ?? "n/a"
 
                 print("#\(round)  CPU \(cpuText)   GPU \(gpuText)")
-                print("     内存 \(memoryText)")
-                print("     硬盘 \(diskText)")
-                print("     网络 \(networkText)")
+                print("     \(L("Memory")) \(memoryText)")
+                print("     \(L("Disk")) \(diskText)")
+                print("     \(L("Network")) \(networkText)")
             }
             if round < rounds { Thread.sleep(forTimeInterval: interval) }
         }
 
         if let capacity = disk.capacity() {
-            print("启动盘 可用 \(Format.size(capacity.free)) / \(Format.size(capacity.total))")
+            print(L("Startup disk %1$@ free of %2$@", Format.size(capacity.free),
+                    Format.size(capacity.total)))
         }
     }
 }

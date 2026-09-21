@@ -35,7 +35,7 @@ final class NetworkMonitor {
         guard let bsdName = primaryInterface() else {
             lastTimestamp = 0                       // 断网后重新建立基线
             lastInterface = ""
-            return Sample(download: 0, upload: 0, interface: "未连接",
+            return Sample(download: 0, upload: 0, interface: L("Not connected"),
                           sessionReceived: sessionReceived, sessionSent: sessionSent)
         }
         guard let counters = counters(for: bsdName) else { return nil }

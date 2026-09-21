@@ -1,0 +1,54 @@
+/* 基准语言：键即英文原文，这里逐条列出便于对照和改写措辞 */
+
+/* 面板 */
+"System Monitor" = "System Monitor";
+"User %1$@ · Sys %2$@" = "User %1$@ · Sys %2$@";
+"Peak %1$@ over %2$ds" = "Peak %1$@ over %2$ds";
+"No IOAccelerator" = "No IOAccelerator";
+"Memory" = "Memory";
+"Swap %@" = "Swap %@";
+"Disk" = "Disk";
+"Network" = "Network";
+"%1$@ free of %2$@" = "%1$@ free of %2$@";
+"Read / Write" = "Read / Write";
+"%1$@ · Session ↓%2$@ ↑%3$@" = "%1$@ · Session ↓%2$@ ↑%3$@";
+"%1$@ · Peak %2$@" = "%1$@ · Peak %2$@";
+
+/* 内存压力角标，宽度有限，保持短 */
+"Critical" = "Critical";
+"Warning" = "Warning";
+"Normal" = "Normal";
+
+/* 窗口层级 */
+"On Desktop" = "On Desktop";
+"Normal Window" = "Normal Window";
+"Always on Top" = "Always on Top";
+
+/* 吸附位置 */
+"Top Left" = "Top Left";
+"Top Right" = "Top Right";
+"Bottom Left" = "Bottom Left";
+"Bottom Right" = "Bottom Right";
+"Free Placement" = "Free Placement";
+
+/* 菜单 */
+"Hide Panel" = "Hide Panel";
+"Show Panel" = "Show Panel";
+"Window Level" = "Window Level";
+"Refresh Interval" = "Refresh Interval";
+"%@ s" = "%@ s";
+"Opacity" = "Opacity";
+"Snap Position" = "Snap Position";
+"Show Menu Bar Icon" = "Show Menu Bar Icon";
+"Launch at Login" = "Launch at Login";
+"Quit" = "Quit";
+
+/* 网络 */
+"Not connected" = "Not connected";
+
+/* --probe 文本输出 */
+"n/a (no IOAccelerator)" = "n/a (no IOAccelerator)";
+"App %1$@ · Wired %2$@ · Compressed %3$@" = "App %1$@ · Wired %2$@ · Compressed %3$@";
+"Read %1$@  Write %2$@" = "Read %1$@  Write %2$@";
+"Session ↓%1$@ ↑%2$@" = "Session ↓%1$@ ↑%2$@";
+"Startup disk %1$@ free of %2$@" = "Startup disk %1$@ free of %2$@";

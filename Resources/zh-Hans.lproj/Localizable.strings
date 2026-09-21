@@ -1,0 +1,54 @@
+/* 简体中文 */
+
+/* 面板 */
+"System Monitor" = "系统监视";
+"User %1$@ · Sys %2$@" = "用户 %1$@ · 系统 %2$@";
+"Peak %1$@ over %2$ds" = "近 %2$d 秒峰值 %1$@";
+"No IOAccelerator" = "未检测到 IOAccelerator";
+"Memory" = "内存";
+"Swap %@" = "交换 %@";
+"Disk" = "硬盘";
+"Network" = "网络";
+"%1$@ free of %2$@" = "可用 %1$@ / %2$@";
+"Read / Write" = "读 / 写";
+"%1$@ · Session ↓%2$@ ↑%3$@" = "%1$@ · 会话 ↓%2$@ ↑%3$@";
+"%1$@ · Peak %2$@" = "%1$@ · 峰值 %2$@";
+
+/* 内存压力角标 */
+"Critical" = "压力紧急";
+"Warning" = "压力警告";
+"Normal" = "压力正常";
+
+/* 窗口层级 */
+"On Desktop" = "贴在桌面上";
+"Normal Window" = "普通窗口";
+"Always on Top" = "始终置顶";
+
+/* 吸附位置 */
+"Top Left" = "左上角";
+"Top Right" = "右上角";
+"Bottom Left" = "左下角";
+"Bottom Right" = "右下角";
+"Free Placement" = "自由摆放";
+
+/* 菜单 */
+"Hide Panel" = "隐藏面板";
+"Show Panel" = "显示面板";
+"Window Level" = "窗口层级";
+"Refresh Interval" = "刷新间隔";
+"%@ s" = "%@ 秒";
+"Opacity" = "不透明度";
+"Snap Position" = "吸附位置";
+"Show Menu Bar Icon" = "显示菜单栏图标";
+"Launch at Login" = "开机自动启动";
+"Quit" = "退出";
+
+/* 网络 */
+"Not connected" = "未连接";
+
+/* --probe 文本输出 */
+"n/a (no IOAccelerator)" = "n/a（无 IOAccelerator）";
+"App %1$@ · Wired %2$@ · Compressed %3$@" = "应用 %1$@ · 联动 %2$@ · 压缩 %3$@";
+"Read %1$@  Write %2$@" = "读 %1$@  写 %2$@";
+"Session ↓%1$@ ↑%2$@" = "会话 ↓%1$@ ↑%2$@";
+"Startup disk %1$@ free of %2$@" = "启动盘 可用 %1$@ / %2$@";

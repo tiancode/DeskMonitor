@@ -12,6 +12,14 @@ open DeskMonitor.app
 
 `DeskMonitor --probe` 可以用纯文本打印 5 轮采样，方便和活动监视器 / `top` 对照校验。
 
+## 语言
+
+界面跟随系统语言，目前提供简体中文和英文，其余语言回退到英文。
+也可以在「系统设置 › 语言与地区 › 应用程序」里单独给本应用指定语言。
+
+新增一种语言只要复制一份 `Resources/en.lproj/`，改成对应的语言代码译完，
+再把该代码加进 `Info.plist` 的 `CFBundleLocalizations` 即可，代码不用动。
+
 ## 操作
 
 应用不占 Dock，**默认也不占菜单栏**——所有设置都在**面板上右键**弹出的菜单里。
@@ -62,6 +70,7 @@ Sources/DeskMonitor/
 ├── main.swift              应用入口、菜单栏、菜单动作
 ├── WidgetWindow.swift      无边框可拖拽窗口 + 层级 / 四角吸附定义
 ├── Probe.swift             --probe 文本校验模式
+├── Localization.swift      文案查表，键即英文原文
 ├── Metrics/
 │   ├── CPUMonitor.swift
 │   ├── GPUMonitor.swift
@@ -74,4 +83,8 @@ Sources/DeskMonitor/
     ├── DashboardView.swift 面板布局
     ├── Sparkline.swift     折线图 / 双向镜像折线图
     └── VisualEffectView.swift  毛玻璃背景
+
+Resources/
+├── en.lproj/               英文（基准语言）
+└── zh-Hans.lproj/          简体中文
 ```

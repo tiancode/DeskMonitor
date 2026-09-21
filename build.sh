@@ -14,6 +14,13 @@ mkdir -p "$APP/Contents/MacOS" "$APP/Contents/Resources"
 cp "$BIN" "$APP/Contents/MacOS/DeskMonitor"
 cp Info.plist "$APP/Contents/Info.plist"
 
+# .strings 转成二进制 plist（和 Xcode 的 CopyStringsFile 一致），免得依赖文本编码嗅探
+for strings in Resources/*.lproj/*.strings; do
+    lproj="$(basename "$(dirname "$strings")")"
+    mkdir -p "$APP/Contents/Resources/$lproj"
+    plutil -convert binary1 "$strings" -o "$APP/Contents/Resources/$lproj/$(basename "$strings")"
+done
+
 echo "▸ 临时签名…"
 codesign --force --sign - "$APP"
 

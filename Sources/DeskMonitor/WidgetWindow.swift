@@ -30,9 +30,9 @@ enum WindowLayer: Int, CaseIterable {
 
     var title: String {
         switch self {
-        case .desktop: return "贴在桌面上"
-        case .normal: return "普通窗口"
-        case .floating: return "始终置顶"
+        case .desktop: return L("On Desktop")
+        case .normal: return L("Normal Window")
+        case .floating: return L("Always on Top")
         }
     }
 
@@ -55,10 +55,10 @@ enum WindowCorner: Int, CaseIterable {
 
     var title: String {
         switch self {
-        case .topLeft: return "左上角"
-        case .topRight: return "右上角"
-        case .bottomLeft: return "左下角"
-        case .bottomRight: return "右下角"
+        case .topLeft: return L("Top Left")
+        case .topRight: return L("Top Right")
+        case .bottomLeft: return L("Bottom Left")
+        case .bottomRight: return L("Bottom Right")
         }
     }
 

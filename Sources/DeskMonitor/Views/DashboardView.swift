@@ -48,7 +48,7 @@ struct DashboardView: View {
             Circle()
                 .fill(LinearGradient(colors: [cpuTint, gpuTint], startPoint: .topLeading, endPoint: .bottomTrailing))
                 .frame(width: 7, height: 7)
-            Text("系统监视")
+            Text(L("System Monitor"))
                 .font(.system(size: 11.5, weight: .semibold, design: .rounded))
                 .foregroundStyle(.white.opacity(0.85))
             Spacer()
@@ -74,7 +74,9 @@ struct DashboardView: View {
     private var cpuSection: some View {
         MetricBlock(title: "CPU",
                     value: Format.percent(engine.cpu),
-                    caption: "用户 \(Format.percent(engine.cpuUser, decimals: 0)) · 系统 \(Format.percent(engine.cpuSystem, decimals: 0))",
+                    caption: L("User %1$@ · Sys %2$@",
+                               Format.percent(engine.cpuUser, decimals: 0),
+                               Format.percent(engine.cpuSystem, decimals: 0)),
                     tint: cpuTint) {
             Sparkline(values: engine.cpuHistory, maxValue: 1.0, tint: cpuTint)
         }
@@ -85,8 +87,9 @@ struct DashboardView: View {
         return MetricBlock(title: "GPU",
                            value: engine.gpuAvailable ? Format.percent(engine.gpu) : "—",
                            caption: engine.gpuAvailable
-                               ? "近 \(Int(Double(MetricsEngine.historyLength) * engine.interval)) 秒峰值 \(Format.percent(peak))"
-                               : "未检测到 IOAccelerator",
+                               ? L("Peak %1$@ over %2$ds", Format.percent(peak),
+                                   Int(Double(MetricsEngine.historyLength) * engine.interval))
+                               : L("No IOAccelerator"),
                            tint: gpuTint) {
             Sparkline(values: engine.gpuHistory, maxValue: 1.0, tint: gpuTint)
         }
@@ -94,10 +97,10 @@ struct DashboardView: View {
 
     private var memorySection: some View {
         let ratio = engine.memoryTotal > 0 ? Double(engine.memoryUsed) / Double(engine.memoryTotal) : 0
-        return MetricBlock(title: "内存",
+        return MetricBlock(title: L("Memory"),
                            value: Format.percent(ratio),
                            caption: "\(Format.size(engine.memoryUsed)) / \(Format.size(engine.memoryTotal))"
-                               + (engine.swapUsed > 0 ? " · 交换 \(Format.size(engine.swapUsed))" : ""),
+                               + (engine.swapUsed > 0 ? " · " + L("Swap %@", Format.size(engine.swapUsed)) : ""),
                            tint: memoryTint,
                            badge: pressureBadge) {
             SegmentedBar(segments: [
@@ -109,7 +112,7 @@ struct DashboardView: View {
     }
 
     private var diskSection: some View {
-        TrafficBlock(title: "硬盘",
+        TrafficBlock(title: L("Disk"),
                      downValue: engine.diskRead,
                      upValue: engine.diskWrite,
                      downHistory: engine.readHistory,
@@ -118,12 +121,12 @@ struct DashboardView: View {
                      upTint: writeTint,
                      floor: 1_000_000,
                      caption: engine.diskCapacity > 0
-                         ? "可用 \(Format.size(engine.diskFree)) / \(Format.size(engine.diskCapacity))"
-                         : "读 / 写")
+                         ? L("%1$@ free of %2$@", Format.size(engine.diskFree), Format.size(engine.diskCapacity))
+                         : L("Read / Write"))
     }
 
     private var networkSection: some View {
-        TrafficBlock(title: "网络",
+        TrafficBlock(title: L("Network"),
                      downValue: engine.networkDownload,
                      upValue: engine.networkUpload,
                      downHistory: engine.downloadHistory,
@@ -131,15 +134,16 @@ struct DashboardView: View {
                      downTint: downloadTint,
                      upTint: uploadTint,
                      floor: 125_000,
-                     caption: "\(engine.networkInterface) · 会话 ↓\(Format.size(engine.sessionReceived)) ↑\(Format.size(engine.sessionSent))")
+                     caption: L("%1$@ · Session ↓%2$@ ↑%3$@", engine.networkInterface,
+                                Format.size(engine.sessionReceived), Format.size(engine.sessionSent)))
     }
 
     /// 「已用」高不等于吃紧：macOS 会把空闲内存拿去做缓存，真正的信号是内存压力。
     private var pressureBadge: MetricBlock<SegmentedBar>.Badge {
         switch engine.memoryPressure {
-        case 1.0: return .init(text: "压力紧急", color: Color(red: 0.98, green: 0.42, blue: 0.42))
-        case 0.5: return .init(text: "压力警告", color: Color(red: 0.98, green: 0.78, blue: 0.35))
-        default: return .init(text: "压力正常", color: Color(red: 0.45, green: 0.85, blue: 0.55))
+        case 1.0: return .init(text: L("Critical"), color: Color(red: 0.98, green: 0.42, blue: 0.42))
+        case 0.5: return .init(text: L("Warning"), color: Color(red: 0.98, green: 0.78, blue: 0.35))
+        default: return .init(text: L("Normal"), color: Color(red: 0.45, green: 0.85, blue: 0.55))
         }
     }
 
@@ -263,7 +267,7 @@ struct TrafficBlock: View {
                               upTint: downTint,
                               downTint: upTint)
                 .frame(height: 30)
-            Text("\(caption) · 峰值 \(Format.speed(peak))")
+            Text(L("%1$@ · Peak %2$@", caption, Format.speed(peak)))
                 .font(.system(size: 9, weight: .medium, design: .rounded))
                 .foregroundStyle(.white.opacity(0.38))
                 .monospacedDigit()

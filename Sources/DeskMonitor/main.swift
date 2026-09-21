@@ -155,8 +155,8 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate {
 
         let item = NSStatusBar.system.statusItem(withLength: NSStatusItem.variableLength)
         item.button?.image = NSImage(systemSymbolName: "gauge.with.dots.needle.bottom.50percent",
-                                     accessibilityDescription: "系统监视")
-            ?? NSImage(systemSymbolName: "gauge", accessibilityDescription: "系统监视")
+                                     accessibilityDescription: L("System Monitor"))
+            ?? NSImage(systemSymbolName: "gauge", accessibilityDescription: L("System Monitor"))
         let menu = NSMenu()
         menu.delegate = self
         item.menu = menu
@@ -168,7 +168,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate {
 
         // 没有菜单栏图标时不提供“隐藏面板”——藏了就再也叫不出来了
         if showsStatusItem {
-            let toggle = NSMenuItem(title: window.isVisible ? "隐藏面板" : "显示面板",
+            let toggle = NSMenuItem(title: window.isVisible ? L("Hide Panel") : L("Show Panel"),
                                     action: #selector(toggleWindow), keyEquivalent: "")
             toggle.target = self
             menu.addItem(toggle)
@@ -183,20 +183,20 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate {
             item.state = option == layer ? .on : .off
             layerMenu.addItem(item)
         }
-        let layerRoot = NSMenuItem(title: "窗口层级", action: nil, keyEquivalent: "")
+        let layerRoot = NSMenuItem(title: L("Window Level"), action: nil, keyEquivalent: "")
         layerRoot.submenu = layerMenu
         menu.addItem(layerRoot)
 
         let intervalMenu = NSMenu()
         for value in [0.5, 1.0, 2.0, 5.0] {
-            let item = NSMenuItem(title: String(format: "%.1f 秒", value),
+            let item = NSMenuItem(title: L("%@ s", String(format: "%.1f", value)),
                                   action: #selector(selectInterval(_:)), keyEquivalent: "")
             item.target = self
             item.representedObject = value
             item.state = abs(engine.interval - value) < 0.01 ? .on : .off
             intervalMenu.addItem(item)
         }
-        let intervalRoot = NSMenuItem(title: "刷新间隔", action: nil, keyEquivalent: "")
+        let intervalRoot = NSMenuItem(title: L("Refresh Interval"), action: nil, keyEquivalent: "")
         intervalRoot.submenu = intervalMenu
         menu.addItem(intervalRoot)
 
@@ -209,7 +209,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate {
             item.state = abs(opacity - value) < 0.01 ? .on : .off
             opacityMenu.addItem(item)
         }
-        let opacityRoot = NSMenuItem(title: "不透明度", action: nil, keyEquivalent: "")
+        let opacityRoot = NSMenuItem(title: L("Opacity"), action: nil, keyEquivalent: "")
         opacityRoot.submenu = opacityMenu
         menu.addItem(opacityRoot)
 
@@ -224,28 +224,28 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate {
             cornerMenu.addItem(item)
         }
         cornerMenu.addItem(.separator())
-        let free = NSMenuItem(title: "自由摆放", action: #selector(clearCorner), keyEquivalent: "")
+        let free = NSMenuItem(title: L("Free Placement"), action: #selector(clearCorner), keyEquivalent: "")
         free.target = self
         free.state = corner == nil ? .on : .off
         cornerMenu.addItem(free)
 
-        let cornerRoot = NSMenuItem(title: "吸附位置", action: nil, keyEquivalent: "")
+        let cornerRoot = NSMenuItem(title: L("Snap Position"), action: nil, keyEquivalent: "")
         cornerRoot.submenu = cornerMenu
         menu.addItem(cornerRoot)
 
-        let statusToggle = NSMenuItem(title: "显示菜单栏图标",
+        let statusToggle = NSMenuItem(title: L("Show Menu Bar Icon"),
                                       action: #selector(toggleStatusItem), keyEquivalent: "")
         statusToggle.target = self
         statusToggle.state = showsStatusItem ? .on : .off
         menu.addItem(statusToggle)
 
-        let login = NSMenuItem(title: "开机自动启动", action: #selector(toggleLoginItem), keyEquivalent: "")
+        let login = NSMenuItem(title: L("Launch at Login"), action: #selector(toggleLoginItem), keyEquivalent: "")
         login.target = self
         login.state = SMAppService.mainApp.status == .enabled ? .on : .off
         menu.addItem(login)
 
         menu.addItem(.separator())
-        let quit = NSMenuItem(title: "退出", action: #selector(NSApplication.terminate(_:)), keyEquivalent: "q")
+        let quit = NSMenuItem(title: L("Quit"), action: #selector(NSApplication.terminate(_:)), keyEquivalent: "q")
         menu.addItem(quit)
     }
 
@@ -295,7 +295,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate {
                 try SMAppService.mainApp.register()
             }
         } catch {
-            NSLog("登录项切换失败: \(error.localizedDescription)")
+            NSLog("Login item toggle failed: \(error.localizedDescription)")
         }
     }
 }
