@@ -11,6 +11,10 @@ final class CPUMonitor {
         var system: Double
     }
 
+    /// `mach_host_self()` 每调用一次就多留一个 send right 且从不回收，
+    /// 放在采样循环里就是每秒泄漏端口引用。主机端口进程内不变，取一次存着。
+    private let host = mach_host_self()
+
     private var previousTicks: [UInt32] = []
     private let stateCount = Int(CPU_STATE_MAX)
 
@@ -19,7 +23,7 @@ final class CPUMonitor {
         var info: processor_info_array_t?
         var infoCount: mach_msg_type_number_t = 0
 
-        let kr = host_processor_info(mach_host_self(),
+        let kr = host_processor_info(host,
                                      processor_flavor_t(PROCESSOR_CPU_LOAD_INFO),
                                      &cpuCount,
                                      &info,

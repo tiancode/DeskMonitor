@@ -14,6 +14,9 @@ final class MemoryMonitor {
         var pressure: Double      // 0...1，基于 kern.memorystatus_vm_pressure_level
     }
 
+    /// 主机端口取一次存着，原因见 `CPUMonitor`
+    private let host = mach_host_self()
+
     let total: UInt64 = {
         var size: UInt64 = 0
         var length = MemoryLayout<UInt64>.size
@@ -27,7 +30,7 @@ final class MemoryMonitor {
 
         let kr = withUnsafeMutablePointer(to: &stats) { pointer in
             pointer.withMemoryRebound(to: integer_t.self, capacity: Int(count)) {
-                host_statistics64(mach_host_self(), HOST_VM_INFO64, $0, &count)
+                host_statistics64(host, HOST_VM_INFO64, $0, &count)
             }
         }
         guard kr == KERN_SUCCESS else { return nil }
