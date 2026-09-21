@@ -29,10 +29,11 @@ final class GPUMonitor {
 
         var service = IOIteratorNext(iterator)
         while service != 0 {
-            // 只取 PerformanceStatistics 一个键：整份属性字典在多核 GPU 上构造一次要上毫秒
+            // 只取 PerformanceStatistics 一个键：整份属性字典在多核 GPU 上构造一次要上毫秒。
+            // 停在 NSDictionary 上按需取键，桥成 Swift Dictionary 会把每个值都装箱一遍。
             if let stats = IORegistryEntryCreateCFProperty(service, "PerformanceStatistics" as CFString,
                                                            kCFAllocatorDefault, 0)?
-                .takeRetainedValue() as? [String: Any] {
+                .takeRetainedValue() as? NSDictionary {
                 found = true
                 for key in utilizationKeys {
                     if let value = stats[key] as? NSNumber {

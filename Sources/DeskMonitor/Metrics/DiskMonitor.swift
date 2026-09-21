@@ -27,10 +27,11 @@ final class DiskMonitor {
 
         var service = IOIteratorNext(iterator)
         while service != 0 {
-            // 只取 Statistics 一个键：构造整份属性字典的开销没必要付
+            // 只取 Statistics 一个键：构造整份属性字典的开销没必要付。
+            // 停在 NSDictionary 上按需取键，桥成 Swift Dictionary 会把每个值都装箱一遍。
             if let stats = IORegistryEntryCreateCFProperty(service, "Statistics" as CFString,
                                                            kCFAllocatorDefault, 0)?
-                .takeRetainedValue() as? [String: Any] {
+                .takeRetainedValue() as? NSDictionary {
                 totalRead += (stats["Bytes (Read)"] as? NSNumber)?.uint64Value ?? 0
                 totalWritten += (stats["Bytes (Write)"] as? NSNumber)?.uint64Value ?? 0
             }

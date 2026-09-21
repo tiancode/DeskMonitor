@@ -30,6 +30,7 @@ final class NetworkMonitor {
     private var lastSent: UInt64 = 0
     private var lastTimestamp: CFAbsoluteTime = 0
     private var lastInterface = ""
+    private var interfaceIndexes = [String: UInt32]()
 
     func read() -> Sample? {
         guard let bsdName = primaryInterface() else {
@@ -94,10 +95,22 @@ final class NetworkMonitor {
 
     // MARK: - 64 位收发计数
 
+    /// `if_nametoindex` 内部要枚举全部网卡，是单次采样里最贵的一步，而名字到索引的
+    /// 映射在网卡存续期间不变，所以缓存下来。网卡拔插后可能同名换号，取不到数就清掉重查。
     private func counters(for bsdName: String) -> (received: UInt64, sent: UInt64)? {
+        if let cached = interfaceIndexes[bsdName], let result = counters(index: cached) {
+            return result
+        }
         let index = if_nametoindex(bsdName)
-        guard index > 0 else { return nil }
+        guard index > 0 else {
+            interfaceIndexes[bsdName] = nil
+            return nil
+        }
+        interfaceIndexes[bsdName] = index
+        return counters(index: index)
+    }
 
+    private func counters(index: UInt32) -> (received: UInt64, sent: UInt64)? {
         var mib: [Int32] = [CTL_NET, PF_ROUTE, 0, 0, NET_RT_IFLIST2, Int32(index)]
         var length = 0
         guard sysctl(&mib, 6, nil, &length, nil, 0) == 0, length > 0 else { return nil }

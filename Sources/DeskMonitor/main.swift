@@ -8,6 +8,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate {
     private var window: WidgetWindow!
     private var statusItem: NSStatusItem?
     private var isAdjustingFrame = false
+    private var pendingOriginSave: DispatchWorkItem?
     private let defaults = UserDefaults.standard
 
     private var layer: WindowLayer {
@@ -42,6 +43,12 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate {
     }
 
     func applicationSupportsSecureRestorableState(_ app: NSApplication) -> Bool { true }
+
+    func applicationWillTerminate(_ notification: Notification) {
+        guard let pending = pendingOriginSave else { return }
+        pending.cancel()
+        savePosition()
+    }
 
     // MARK: - 窗口
 
@@ -89,7 +96,21 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate {
 
     @objc private func windowDidMove() {
         guard !isAdjustingFrame else { return }
-        defaults.set(-1, forKey: "snapCorner")          // 用户拖过，解除吸附
+
+        // 用户拖过，解除吸附。只在还吸附着时写，免得一次拖动反复写同一个值
+        if defaults.integer(forKey: "snapCorner") != -1 {
+            defaults.set(-1, forKey: "snapCorner")
+        }
+
+        // 一次拖动会连发上百次 didMove，位置攒到停手之后写一次
+        pendingOriginSave?.cancel()
+        let save = DispatchWorkItem { [weak self] in self?.savePosition() }
+        pendingOriginSave = save
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.4, execute: save)
+    }
+
+    private func savePosition() {
+        pendingOriginSave = nil
         savedOrigin = window.frame.origin
     }
 
